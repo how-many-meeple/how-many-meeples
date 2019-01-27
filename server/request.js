@@ -1,19 +1,12 @@
-import https from 'https';
+import axios from 'axios';
+
 export default function makeRequest(url) {
-    return new Promise(function (resolve, reject) {
-        https.get(url, (resp) => {
-            let data = '';
-
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-
-            resp.on('end', () => {
-                resolve(JSON.parse(data));
-            });
-        }).on('error', (err) => {
-            reject('Error: ' + err.message);
+    return axios.get(url)
+        .then(function(response){
+            return response.data;
+        })
+        .catch(function(error) {
+            return error;
         });
-    });
 }
 

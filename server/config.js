@@ -1,4 +1,3 @@
-const boardGameGeek = new URL('https://gametableproxy.herokuapp.com');
-const defaultPath = '/api/v1/';
+import UrlAssembler from 'url-assembler';
 
-export {boardGameGeek, defaultPath};
+export default UrlAssembler('https://gametableproxy.herokuapp.com/api/v1/');

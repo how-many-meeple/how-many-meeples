@@ -1,9 +1,12 @@
-import * as url from '../config';
+import bggUrl from '../config';
 import makeRequest from '../request';
 
 export default async function createGetCollectionHandler(req, res) {
-    const collectionUrl = url.boardGameGeek;
-    collectionUrl.pathname = `${url.defaultPath}collection`;
-    collectionUrl.search = `username=${req.params.username}&own=1`;
-    res.json(await makeRequest(collectionUrl.href));
+    const collectionUrl = bggUrl
+        .segment('collection')
+        .param({
+            'username': req.params.username,
+            'own': 1
+        }).toString();
+    res.json(await makeRequest(collectionUrl));
 }
