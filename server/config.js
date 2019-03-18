@@ -1,3 +1,3 @@
 import UrlAssembler from 'url-assembler';
 
-export default UrlAssembler('https://gametableproxy.herokuapp.com/api/v1/');
+export default UrlAssembler('http://game-selector.sixfootsoftware.com/');
