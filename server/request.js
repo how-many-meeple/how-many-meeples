@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default function makeRequest(url, headers) {
-    return axios.get(url, headers)
+    return axios.get(url, {headers: headers})
         .then(function (response) {
             return response.data;
         })
