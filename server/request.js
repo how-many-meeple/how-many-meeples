@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export default function makeRequest(url) {
-    return axios.get(url)
-        .then(function(response){
+export default function makeRequest(url, headers) {
+    return axios.get(url, {headers})
+        .then(function (response) {
             return response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
             return error;
         });
 }
