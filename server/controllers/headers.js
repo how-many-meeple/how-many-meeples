@@ -4,6 +4,6 @@ export const BggFilterMaxDuration = 'Bgg-Filter-Max-Duration';
 
 export function filterHeaders(requestHeaders) {
     return Object.entries(requestHeaders)
-        .filter(([key, val]) => val !== undefined) //eslint-disable-line no-unused-vars
+        .filter(([ , val]) => val !== undefined) //eslint-disable-line no-unused-vars
         .reduce((acc, [key, val]) => ({ ...acc, [key]: val }), {});
 }
