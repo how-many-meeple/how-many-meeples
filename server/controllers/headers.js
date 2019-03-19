@@ -3,6 +3,7 @@ export const BggFilterMinDuration = 'Bgg-Filter-Min-Duration';
 export const BggFilterMaxDuration = 'Bgg-Filter-Max-Duration';
 
 export function filterHeaders(requestHeaders) {
-    Object.keys(requestHeaders).forEach(key => requestHeaders[key] === undefined && delete requestHeaders[key]);
-    return requestHeaders;
+    return Object.entries(requestHeaders)
+        .filter(([key, val]) => val !== undefined) //eslint-disable-line no-unused-vars
+        .reduce((acc, [key, val]) => ({ ...acc, [key]: val }), {});
 }
