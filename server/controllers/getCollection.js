@@ -1,5 +1,6 @@
 import * as headers from './headers';
 import bggUrl from '../config';
+import getRandomGame from './getRandomGame';
 import makeRequest from '../request';
 
 export default async function createGetCollectionHandler(req, res) {
@@ -9,7 +10,9 @@ export default async function createGetCollectionHandler(req, res) {
         const requestHeaders = {
             [headers.BggFilterPlayerCount]: req.query.numPlayers,
             [headers.BggFilterMinDuration]: req.query.minDuration,
-            [headers.BggFilterMaxDuration]: req.query.maxDuration
+            [headers.BggFilterMaxDuration]: req.query.maxDuration,
+            [headers.BggFieldWhitelist]: 'name,maxplayers,minplayers,maxplaytime,image,thumbnail'
         };
-        res.json(await makeRequest(collectionUrl, headers.filterHeaders(requestHeaders)));
+    const gamesList = await makeRequest(collectionUrl, headers.filterHeaders(requestHeaders));
+    res.json(getRandomGame(gamesList));
 }
