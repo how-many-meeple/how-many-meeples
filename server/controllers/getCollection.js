@@ -11,7 +11,7 @@ export default async function createGetCollectionHandler(req, res) {
             [headers.BggFilterPlayerCount]: req.query.numPlayers,
             [headers.BggFilterMinDuration]: req.query.minDuration,
             [headers.BggFilterMaxDuration]: req.query.maxDuration,
-            [headers.BggFieldWhitelist]: 'name,maxplayers,minplayers,maxplaytime,image,thumbnail'
+            [headers.BggFieldWhitelist]: headers.defaultWhitelist
         };
     const gamesList = await makeRequest(collectionUrl, headers.filterHeaders(requestHeaders));
     res.json(getRandomGame(gamesList));
