@@ -1,8 +1,10 @@
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import RandomGame from './RandomGame';
 import React from 'react';
 import ReactDOM  from 'react-dom';
+
 
 const theme = createMuiTheme({
     typography: {
@@ -16,7 +18,8 @@ ReactDOM.render(
         <CssBaseline />
             <BrowserRouter>
                 <Switch>
-                    <div>Hello World</div>
+                  <Route path="/random/:listType/:listOption" component={RandomGame} />
+                  <Route><div>Hello World</div></Route>
                 </Switch>
             </BrowserRouter>
     </MuiThemeProvider>,
