@@ -6,10 +6,12 @@ describe('filterHeaders', () => {
         const initalHeaders = {
             [headers.BggFilterPlayerCount]: 5,
             [headers.BggFilterMinDuration]: undefined,
-            [headers.BggFilterMaxDuration]: undefined
+            [headers.BggFilterMaxDuration]: undefined,
+            [headers.BggFieldWhitelist]: headers.defaultWhitelist
         };
         const expectedHeaders = {
-            [headers.BggFilterPlayerCount]: 5
+            [headers.BggFilterPlayerCount]: 5,
+            [headers.BggFieldWhitelist]: headers.defaultWhitelist
         };
         const returnedHeaders = headers.filterHeaders(initalHeaders);
 
