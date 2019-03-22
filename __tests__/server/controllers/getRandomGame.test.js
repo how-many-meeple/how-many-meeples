@@ -1,4 +1,4 @@
-import getRandomGame from '../../../server/controllers/getRandomGame';
+import { getRandomGame } from '../../../server/controllers/getRandomGame';
 
 describe('getRandomGame', () => {
 
