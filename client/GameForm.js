@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/es/InputLabel/InputLabel';
 import MenuItem from '@material-ui/core/es/MenuItem/MenuItem';
+import NumberInput from './NumberInput';
 import Select from '@material-ui/core/es/Select/Select';
-import TextField from '@material-ui/core/es/TextField/TextField';
 
 const GameForm = () => {
     const [listType, setListType] = useState('');
@@ -26,26 +26,23 @@ const GameForm = () => {
                     <MenuItem value={'collection'}>Collection</MenuItem>
                     <MenuItem value={'geeklist'}>Geek List</MenuItem>
                 </Select>
-                <TextField
-                    id="numberOfPlayers"
+                <NumberInput
+                    id='numberOfPlayers'
                     value={numPlayers}
                     label="Number of Players"
-                    onChange={e => setNumPlayers(e.target.value)}
-                    type="number"
+                    setFunction={setNumPlayers}
                 />
-                <TextField
-                    id="minDuration"
+                <NumberInput
+                    id='minDuration'
                     value={minDuration}
-                    label="Minimum Duration(minutes)"
-                    onChange={e => setMinDuration(e.target.value)}
-                    type="number"
+                    label='Minimum Duration (mins)'
+                    setFunction={setMinDuration}
                 />
-                <TextField
-                    id="maxDuration"
+                <NumberInput
+                    id='maxDuration'
                     value={maxDuration}
-                    label="Maximum Duration(minutes)"
-                    onChange={e => setMaxDuration(e.target.value)}
-                    type="number"
+                    label='Maximum Duration (mins)'
+                    setFunction={setMaxDuration}
                 />
             </FormControl>
         </form>
