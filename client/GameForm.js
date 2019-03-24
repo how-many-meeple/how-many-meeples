@@ -1,21 +1,36 @@
-import React, { useState } from 'react';
 import Button from '@material-ui/core/es/Button/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/es/InputLabel/InputLabel';
 import MenuItem from '@material-ui/core/es/MenuItem/MenuItem';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Select from '@material-ui/core/es/Select/Select';
 import TextField from '@material-ui/core/TextField/TextField';
 import { useInput } from './hooks/InputHook';
+import { withRouter } from 'react-router';
 
-const GameForm = () => {
-    const {value: listType, bind: bindListType, reset: resetListType } = useInput(''); //eslint-disable-line no-unused-vars
-    const {value: numPlayers, bind: bindNumPlayers, reset: resetNumPlayers} = useInput(''); //eslint-disable-line no-unused-vars
-    const {value: minDuration, bind: bindMinDuration, reset: resetMinDuration} = useInput(''); //eslint-disable-line no-unused-vars
-    const {value: maxDuration, bind: bindMaxDuration, reset: resetMaxDuration} = useState(''); //eslint-disable-line no-unused-vars
-    const {value: listOption, bind: bindListOption, reset: resetListOption} = useInput(''); //eslint-disable-line no-unused-vars
-
+const GameForm = ({ history }) => {
+    const {value: listType, bind: bindListType, reset: resetListType } = useInput(''); 
+    const {value: listOption, bind: bindListOption, reset: resetListOption} = useInput('');
+    const {value: numPlayers, bind: bindNumPlayers, reset: resetNumPlayers} = useInput('');
+    const {value: minDuration, bind: bindMinDuration, reset: resetMinDuration} = useInput('');
+    const {value: maxDuration, bind: bindMaxDuration, reset: resetMaxDuration} = useInput('');
+   
     const handleSubmit = (event) => {
         event.preventDefault();
+        history.push({
+            pathname: `/random/${listType}/${listOption}`,
+            search: `?numPlayers=${numPlayers}&minDuration=${minDuration}&maxDuration=${maxDuration}`
+        });
+        resetForm();
+    };
+
+    const resetForm = () => {
+        resetListType();
+        resetListOption();
+        resetNumPlayers();
+        resetMaxDuration();
+        resetMinDuration();
     };
 
     return (
@@ -49,4 +64,8 @@ const GameForm = () => {
     );
 };
 
-export default GameForm;
+GameForm.propTypes = {
+    history: PropTypes.object.isRequired
+};
+
+export default withRouter(GameForm);
