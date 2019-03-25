@@ -105,6 +105,9 @@ RandomGame.propTypes = {
   classes: PropTypes.shape({
     modalContent: PropTypes.string,
     gameBox: PropTypes.string,
+    progress: PropTypes.string,
+    failed: PropTypes.string,
+    getGameBtn: PropTypes.string,
   }),
 };
 
