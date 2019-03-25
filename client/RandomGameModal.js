@@ -11,13 +11,20 @@ const styles = {
   modalContent: {
     position: 'absolute',
     top: '50%',
-    transform: 'translate(-50%, -50%)',
     left: '50%',
+    transform: 'translate(-50%, -50%)',
     width: '50vw',
     height: '75vh',
     outline: 'none',
-    overflowY: 'auto',
+    padding: '15px',
+    '& h3': {
+      margin: 0,
+    }
   },
+  gameBox: {
+    margin: '20px',
+    height: 'calc(100% - 150px)',
+  }
 };
 
 const RandomGame = ({ match, history, classes }) => {
@@ -36,14 +43,16 @@ const RandomGame = ({ match, history, classes }) => {
       disableRestoreFocus
     >
       <Paper className={classes.modalContent}>
-      <h2>Your Random game is...</h2>
-      {
-        game
-        ? (
-          <Game game={game} />
-        )
-        : <div>No game found...</div>
-      }
+      <h3>Your Random game is...</h3>
+      <div className={classes.gameBox}>
+        {
+          game
+          ? (
+            <Game game={game} />
+          )
+          : <div>No game found...</div>
+        }
+      </div>
       </Paper>
     </Modal>
   );
@@ -61,6 +70,7 @@ RandomGame.propTypes = {
   }),
   classes: PropTypes.shape({
     modalContent: PropTypes.string,
+    gameBox: PropTypes.string,
   }),
 };
 
