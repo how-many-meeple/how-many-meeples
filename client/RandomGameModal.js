@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Game from './Game';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
@@ -24,6 +25,10 @@ const styles = {
   gameBox: {
     margin: '20px',
     height: 'calc(100% - 150px)',
+  },
+  progress: {
+    marginTop:'calc(50% - 100px)',
+    marginLeft:'calc(50% - 100px)',
   }
 };
 
@@ -50,7 +55,10 @@ const RandomGame = ({ match, history, classes }) => {
           ? (
             <Game game={game} />
           )
-          : <div>No game found...</div>
+          : <CircularProgress
+              className={classes.progress}
+              size={200}
+            />
         }
       </div>
       </Paper>
