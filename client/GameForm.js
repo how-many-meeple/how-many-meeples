@@ -7,14 +7,13 @@ import React from 'react';
 import Select from '@material-ui/core/es/Select/Select';
 import TextField from '@material-ui/core/TextField/TextField';
 import { useInput } from './hooks/InputHook';
-import { withRouter } from 'react-router';
 
 const GameForm = ({ history }) => {
-    const {value: listType, bind: bindListType, reset: resetListType } = useInput(''); 
-    const {value: listOption, bind: bindListOption, reset: resetListOption} = useInput('');
-    const {value: numPlayers, bind: bindNumPlayers, reset: resetNumPlayers} = useInput('');
-    const {value: minDuration, bind: bindMinDuration, reset: resetMinDuration} = useInput('');
-    const {value: maxDuration, bind: bindMaxDuration, reset: resetMaxDuration} = useInput('');
+    const {value: listType, bind: bindListType} = useInput('collection');
+    const {value: listOption, bind: bindListOption} = useInput('');
+    const {value: numPlayers, bind: bindNumPlayers} = useInput('');
+    const {value: minDuration, bind: bindMinDuration} = useInput('');
+    const {value: maxDuration, bind: bindMaxDuration} = useInput('');
    
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -22,15 +21,6 @@ const GameForm = ({ history }) => {
             pathname: `/random/${listType}/${listOption}`,
             search: `?numPlayers=${numPlayers}&minDuration=${minDuration}&maxDuration=${maxDuration}`
         });
-        resetForm();
-    };
-
-    const resetForm = () => {
-        resetListType();
-        resetListOption();
-        resetNumPlayers();
-        resetMaxDuration();
-        resetMinDuration();
     };
 
     return (
@@ -42,17 +32,10 @@ const GameForm = ({ history }) => {
                     <MenuItem value={'geeklist'}>Geek List</MenuItem>
                 </Select>
 
-                <InputLabel htmlFor="listOption">Collection Username or Geek list id</InputLabel>
-                <TextField required type='text' {...bindListOption}/>
-
-                <InputLabel htmlFor="numPlayers">Number of Players</InputLabel>
-                <TextField type='number' {...bindNumPlayers}/>
-
-                <InputLabel htmlFor="minDuration">Minimum Duration (mins)</InputLabel>
-                <TextField type='number' {...bindMinDuration}/>
-
-                <InputLabel htmlFor="maxDuration">Maximum Duration (mins)</InputLabel>
-                <TextField type='number' {...bindMaxDuration}/>
+                <TextField label='Collection Username or Geek list ID' required type='text' {...bindListOption}/>
+                <TextField label='Number of Players' type='number' {...bindNumPlayers}/>
+                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration}/>
+                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration}/>
 
                 <Button variant="contained"
                     color="primary"
@@ -68,4 +51,4 @@ GameForm.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default withRouter(GameForm);
+export default GameForm;
