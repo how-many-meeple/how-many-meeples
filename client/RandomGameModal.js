@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-const RandomGame = ({ match, classes }) => {
+const RandomGame = ({ match, history, classes }) => {
   const { listType, listOption } = match.params;
   const [game, setGame] = useState(null);
 
@@ -32,7 +32,7 @@ const RandomGame = ({ match, classes }) => {
   return (
     <Modal
       open={true}
-      onClose={null}
+      onClose={() => history.push('/')}
       disableRestoreFocus
     >
       <Paper className={classes.modalContent}>
@@ -55,6 +55,9 @@ RandomGame.propTypes = {
       listType: PropTypes.string,
       listOption: PropTypes.string,
     }),
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }),
   classes: PropTypes.shape({
     modalContent: PropTypes.string,
