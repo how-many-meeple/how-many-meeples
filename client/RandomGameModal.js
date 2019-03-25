@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Game from './Game';
 import Modal from '@material-ui/core/Modal';
@@ -25,20 +26,42 @@ const styles = {
   gameBox: {
     margin: '20px',
     height: 'calc(100% - 150px)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   progress: {
-    marginTop:'calc(50% - 100px)',
     marginLeft:'calc(50% - 100px)',
+  },
+  failed: {
+    textAlign: 'center',
+  },
+  getGameBtn: {
+    display: 'block',
+    margin: '0 auto',
   }
 };
 
 const RandomGame = ({ match, history, classes }) => {
   const { listType, listOption } = match.params;
   const [game, setGame] = useState(null);
+  const [isLoaded, setLoaded] = useState(false);
+  
+  const getGame = () => {
+    setGame(null);
+    setLoaded(false);
+    axios.get(`/bgg/${listType}/${listOption}`)
+      .then((response) => {
+        setGame(response.data);
+        setLoaded(true);
+      })
+      .catch(() => {
+        setLoaded(true);
+      });
+  };
 
   useEffect(() => {
-    axios.get(`/bgg/${listType}/${listOption}`)
-      .then(response => setGame(response.data));
+    getGame();
   }, []);
 
   return (
@@ -48,19 +71,24 @@ const RandomGame = ({ match, history, classes }) => {
       disableRestoreFocus
     >
       <Paper className={classes.modalContent}>
-      <h3>Your Random game is...</h3>
-      <div className={classes.gameBox}>
-        {
-          game
-          ? (
-            <Game game={game} />
-          )
-          : <CircularProgress
-              className={classes.progress}
-              size={200}
-            />
-        }
-      </div>
+        <h3>Your random game is...</h3>
+        <div className={classes.gameBox}>
+          {
+            game
+            ? <Game game={game} />
+            : isLoaded 
+              ? <h3 className={classes.failed}>Sorry! Failed to find game</h3>
+              : <CircularProgress className={classes.progress} size={200} />
+          }
+        </div>
+        <Button
+          className={classes.getGameBtn}
+          variant="contained"
+          color="primary"
+          onClick={getGame}
+        >
+          Next random game
+        </Button>
       </Paper>
     </Modal>
   );
