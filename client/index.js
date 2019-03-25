@@ -1,6 +1,7 @@
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import GameForm from './GameForm';
 import React from 'react';
 import ReactDOM  from 'react-dom';
 
@@ -15,9 +16,9 @@ ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <CssBaseline />
             <BrowserRouter>
-                <Switch>
-                    <div>Hello World</div>
-                </Switch>
+                <div>
+                    <Route path="/" component={GameForm}/>
+                </div>
             </BrowserRouter>
     </MuiThemeProvider>,
     document.getElementById('client')
