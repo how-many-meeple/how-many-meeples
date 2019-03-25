@@ -5,6 +5,7 @@ import Game from './Game';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -19,9 +20,6 @@ const styles = {
     height: '75vh',
     outline: 'none',
     padding: '15px',
-    '& h3': {
-      margin: 0,
-    }
   },
   gameBox: {
     margin: '20px',
@@ -71,13 +69,13 @@ const RandomGame = ({ match, history, classes }) => {
       disableRestoreFocus
     >
       <Paper className={classes.modalContent}>
-        <h3>Your random game is...</h3>
+        <Typography variant="h4">Your random game is...</Typography>
         <div className={classes.gameBox}>
           {
             game
             ? <Game game={game} />
             : isLoaded 
-              ? <h3 className={classes.failed}>Sorry! Failed to find game</h3>
+              ? <Typography variant="h4" className={classes.failed}>Sorry! Failed to find game</Typography>
               : <CircularProgress className={classes.progress} size={200} />
           }
         </div>

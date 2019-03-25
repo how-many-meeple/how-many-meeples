@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -19,7 +20,7 @@ const styles = {
 const Game = ({ classes, game }) => {
   return (
     <React.Fragment>
-      <h2 className={classes.title}>{game.name}</h2>
+      <Typography variant="h4" className={classes.title}>{game.name}</Typography>
       <img className={classes.image} src={game.image} />
     </React.Fragment>
   );
