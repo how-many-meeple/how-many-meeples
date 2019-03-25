@@ -33,7 +33,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['server/dist']),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['server/dist']
+        }),
         new MiniCssExtractPlugin({
             filename: 'client.css',
             chunkFilename: '[id].css'

@@ -13,7 +13,7 @@ const styles = {
     display: 'block',
     margin: 'auto',
     maxWidth: '100%',
-    maxHeight: 'calc(100% - 60px)',
+    maxHeight: 'calc(100% - 80px)',
   }
 };
 
