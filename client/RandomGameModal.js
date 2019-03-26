@@ -40,15 +40,16 @@ const styles = {
   }
 };
 
-const RandomGame = ({ match, history, classes }) => {
+const RandomGame = ({ match, history, location, classes }) => {
   const { listType, listOption } = match.params;
+  const queryString = location.search;
   const [game, setGame] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
   
   const getGame = () => {
     setGame(null);
     setLoaded(false);
-    axios.get(`/bgg/${listType}/${listOption}`)
+    axios.get(`/bgg/${listType}/${listOption}${queryString}`)
       .then((response) => {
         setGame(response.data);
         setLoaded(true);
@@ -98,6 +99,9 @@ RandomGame.propTypes = {
       listType: PropTypes.string,
       listOption: PropTypes.string,
     }),
+  }),
+  location: PropTypes.shape({
+    search: PropTypes.string,
   }),
   history: PropTypes.shape({
     push: PropTypes.func,
