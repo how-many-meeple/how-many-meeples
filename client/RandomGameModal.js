@@ -60,7 +60,7 @@ const RandomGame = ({ match, history, classes }) => {
 
   useEffect(() => {
     getGame();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Modal

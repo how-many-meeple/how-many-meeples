@@ -13,7 +13,8 @@
     ],
     "plugins": [
       "react",
-      "jest"
+      "jest",
+      "react-hooks"
     ],
     "rules": {
       "semi": "error",
@@ -26,7 +27,9 @@
         {
           "avoidEscape": true
         }
-      ]
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
     },
     "env": {
       "es6": true,
