@@ -8,7 +8,6 @@ import ReactDOM  from 'react-dom';
 
 const theme = createMuiTheme({
     typography: {
-        fontFamily: ['SkyTextRegular', 'Verdana', 'sans-serif'],
         useNextVariants: true
     }
 });

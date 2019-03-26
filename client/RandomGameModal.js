@@ -45,7 +45,7 @@ const RandomGame = ({ match, history, location, classes }) => {
   const queryString = location.search;
   const [game, setGame] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
-  
+
   const getGame = () => {
     setGame(null);
     setLoaded(false);
@@ -70,13 +70,13 @@ const RandomGame = ({ match, history, location, classes }) => {
       disableRestoreFocus
     >
       <Paper className={classes.modalContent}>
-        <Typography variant="h4">Your random game is...</Typography>
+        <Typography variant="h3">Your random game is...</Typography>
         <div className={classes.gameBox}>
           {
             game
             ? <Game game={game} />
-            : isLoaded 
-              ? <Typography variant="h4" className={classes.failed}>Sorry! Failed to find game</Typography>
+            : isLoaded
+              ? <Typography variant="h3" className={classes.failed}>Sorry! Failed to find game</Typography>
               : <CircularProgress className={classes.progress} size={200} />
           }
         </div>

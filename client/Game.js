@@ -20,7 +20,7 @@ const styles = {
 const Game = ({ classes, game }) => {
   return (
     <React.Fragment>
-      <Typography variant="h4" className={classes.title}>{game.name}</Typography>
+      <Typography variant="h3" className={classes.title}>{game.name}</Typography>
       <img className={classes.image} src={game.image} />
     </React.Fragment>
   );
