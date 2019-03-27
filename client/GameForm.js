@@ -14,7 +14,19 @@ const GameForm = ({ history }) => {
     const { value: numPlayers, bind: bindNumPlayers } = useInput('');
     const { value: minDuration, bind: bindMinDuration } = useInput('');
     const { value: maxDuration, bind: bindMaxDuration } = useInput('');
-    const durationInputProps = { min: '0', max: '1440', step: '5' }; 
+
+    const calculateMinMax = (defaultMinutes, duration) => {
+        if(duration){
+            return duration;
+        }else{
+            return defaultMinutes;
+        }
+    };
+
+    const twentyFourHours = '1440';
+    const twelveHours = '720';
+    const minDurationDefaults = { min: '0', max: calculateMinMax(twelveHours, maxDuration), step: '5'};
+    const maxDurationDefaults = { min: calculateMinMax('0', minDuration), max: twentyFourHours, step: '5' };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -35,8 +47,8 @@ const GameForm = ({ history }) => {
 
                 <TextField label='Collection Username or Geek list ID' required type='text' {...bindListOption} />
                 <TextField label='Number of Players' type='number' {...bindNumPlayers} inputProps={{ min: '1', max: '100', step: '1' }} />
-                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration} inputProps={durationInputProps} />
-                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration} inputProps={durationInputProps} />
+                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration} inputProps={minDurationDefaults} />
+                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration} inputProps={maxDurationDefaults} />
 
                 <Button variant="contained"
                     color="primary"
