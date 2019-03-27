@@ -7,13 +7,14 @@ module.exports = {
     entry: './client/index.js',
     output: {
         filename: 'dist/client.js',
-        path: path.resolve(__dirname, 'server')
+        path: path.resolve(__dirname, 'server'),
+        publicPath: '/'
     },
     module: {
         rules: [
             {
                 enforce: 'pre',
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx?)$/,
                 exclude: /node_modules/,
                 loader: 'eslint-loader',
                 options: {
@@ -21,7 +22,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx?)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             },
@@ -32,7 +33,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['server/dist']),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['server/dist']
+        }),
         new MiniCssExtractPlugin({
             filename: 'client.css',
             chunkFilename: '[id].css'

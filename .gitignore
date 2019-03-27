@@ -2,7 +2,9 @@
 # Created by https://www.gitignore.io/api/node,visualstudiocode,windows
 # Edit at https://www.gitignore.io/?templates=node,visualstudiocode,windows
 
+### IntelliJ ###
 .idea/
+how-many-meeples.iml
 
 ### Node ###
 # Logs
