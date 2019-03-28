@@ -15,13 +15,7 @@ const GameForm = ({ history }) => {
     const { value: minDuration, bind: bindMinDuration } = useInput('');
     const { value: maxDuration, bind: bindMaxDuration } = useInput('');
 
-    const calculateMinMax = (defaultMinutes, duration) => {
-        if(duration){
-            return duration;
-        }else{
-            return defaultMinutes;
-        }
-    };
+    const calculateMinMax = (defaultMinutes, duration) => {return duration ? duration : defaultMinutes;};
 
     const twentyFourHours = '1440';
     const twelveHours = '720';
