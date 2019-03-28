@@ -9,12 +9,19 @@ import TextField from '@material-ui/core/TextField/TextField';
 import { useInput } from './hooks/InputHook';
 
 const GameForm = ({ history }) => {
-    const {value: listType, bind: bindListType} = useInput('collection');
-    const {value: listOption, bind: bindListOption} = useInput('');
-    const {value: numPlayers, bind: bindNumPlayers} = useInput('');
-    const {value: minDuration, bind: bindMinDuration} = useInput('');
-    const {value: maxDuration, bind: bindMaxDuration} = useInput('');
-   
+    const { value: listType, bind: bindListType } = useInput('collection');
+    const { value: listOption, bind: bindListOption } = useInput('');
+    const { value: numPlayers, bind: bindNumPlayers } = useInput('');
+    const { value: minDuration, bind: bindMinDuration } = useInput('');
+    const { value: maxDuration, bind: bindMaxDuration } = useInput('');
+
+    const calculateMinMax = (defaultMinutes, duration) => {return duration ? duration : defaultMinutes;};
+
+    const twentyFourHours = '1440';
+    const twelveHours = '720';
+    const minDurationDefaults = { min: '0', max: calculateMinMax(twelveHours, maxDuration), step: '5'};
+    const maxDurationDefaults = { min: calculateMinMax('0', minDuration), max: twentyFourHours, step: '5' };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         history.push({
@@ -32,10 +39,10 @@ const GameForm = ({ history }) => {
                     <MenuItem value={'geeklist'}>Geek List</MenuItem>
                 </Select>
 
-                <TextField label='Collection Username or Geek list ID' required type='text' {...bindListOption}/>
-                <TextField label='Number of Players' type='number' {...bindNumPlayers}/>
-                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration}/>
-                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration}/>
+                <TextField label='Collection Username or Geek list ID' required type='text' {...bindListOption} />
+                <TextField label='Number of Players' type='number' {...bindNumPlayers} inputProps={{ min: '1', max: '100', step: '1' }} />
+                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration} inputProps={minDurationDefaults} />
+                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration} inputProps={maxDurationDefaults} />
 
                 <Button variant="contained"
                     color="primary"
