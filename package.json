@@ -63,8 +63,7 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/path/to/dir/"
+      "<rootDir>/node_modules/"
     ],
     "moduleFileExtensions": [
       "js",
