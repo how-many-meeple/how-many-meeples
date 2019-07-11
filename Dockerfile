@@ -22,7 +22,6 @@ FROM base AS release
 COPY --from=builder /tmp/node_modules ./node_modules
 COPY --from=builder /app/server ./server
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/server/index.html ./
 COPY --from=builder /app/.babelrc ./
 EXPOSE 3000
 CMD ["npm", "start"]
