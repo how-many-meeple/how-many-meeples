@@ -3,7 +3,7 @@ FROM node:11-alpine AS base
 # set working directory
 WORKDIR /app
 
-# --- Development ---
+# ---- Development ----
 FROM base as development
 COPY package*.json ./
 RUN npm ci --production
