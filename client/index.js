@@ -1,5 +1,6 @@
 import { BrowserRouter, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GameForm from './GameForm';
 import RandomGameModal from './RandomGameModal';
@@ -8,7 +9,8 @@ import ReactDOM  from 'react-dom';
 
 const theme = createMuiTheme({
     typography: {
-        useNextVariants: true
+        useNextVariants: true,
+        fontSize: 20,
     }
 });
 
@@ -17,8 +19,10 @@ ReactDOM.render(
         <CssBaseline />
             <BrowserRouter>
                 <div>
-                    <Route component={GameForm}/>
-                    <Route path="/random/:listType/:listOption" component={RandomGameModal} />
+                    <Container fixed>
+                        <Route component={GameForm}/>
+                        <Route path="/random/:listType/:listOption" component={RandomGameModal} />
+                    </Container>
                 </div>
             </BrowserRouter>
     </MuiThemeProvider>,

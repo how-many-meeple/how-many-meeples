@@ -32,21 +32,19 @@ const GameForm = ({ history }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <FormControl>
+            <FormControl fullWidth component={'div'} margin='normal' >
                 <InputLabel htmlFor="listType">Board Game Geek List Type</InputLabel>
                 <Select required {...bindListType}>
                     <MenuItem value={'collection'}>Collection</MenuItem>
                     <MenuItem value={'geeklist'}>Geek List</MenuItem>
                 </Select>
 
-                <TextField label='Collection Username or Geek list ID' required type='text' {...bindListOption} />
-                <TextField label='Number of Players' type='number' {...bindNumPlayers} inputProps={{ min: '1', max: '100', step: '1' }} />
-                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration} inputProps={minDurationDefaults} />
-                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration} inputProps={maxDurationDefaults} />
+                <TextField label='Collection Username or Geek list ID' required type='text' {...bindListOption} margin='normal' />
+                <TextField label='Number of Players' type='number' {...bindNumPlayers} inputProps={{ min: '1', max: '100', step: '1' }} margin='normal' />
+                <TextField label='Minimum Duration (mins)' type='number' {...bindMinDuration} inputProps={minDurationDefaults} margin='normal' />
+                <TextField label='Maximum Duration (mins)' type='number' {...bindMaxDuration} inputProps={maxDurationDefaults} margin='normal' />
 
-                <Button variant="contained"
-                    color="primary"
-                    type="submit">
+                <Button variant="contained" color="primary" type="submit">
                     Find Random Game
                 </Button>
             </FormControl>
