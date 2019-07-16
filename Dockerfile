@@ -2,27 +2,26 @@
 FROM node:11-alpine AS base
 # set working directory
 WORKDIR /app
-# copy project file
+
+# ---- Development ----
+FROM base as development
 COPY package*.json ./
-
-# ---- Dependencies ----
-FROM base AS dependencies
-# install node packages
-RUN npm set progress=false
-# install ALL node_modules, including 'devDependencies'
-RUN npm install
-
-# ---- Test ----
-## run linters, setup and tests
-FROM dependencies AS test
+RUN npm ci --production
+RUN cp -R node_modules /tmp/node_modules
+RUN npm ci
 COPY . .
-RUN  npm run lint && npm run test
+
+# ---- Builder ----
+FROM development AS builder
+RUN npm run lint
+RUN npm test -- --colors
+RUN npm run bundle-prod
 
 # ---- Release ----
 FROM base AS release
-RUN npm install --only=production
-# copy app sources
-COPY . .
-# expose port and define CMD
+COPY --from=builder /tmp/node_modules ./node_modules
+COPY --from=builder /app/server ./server
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/.babelrc ./
 EXPOSE 3000
-CMD npm start
+CMD ["npm", "start"]
