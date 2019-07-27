@@ -46,10 +46,10 @@ const RandomGame = ({ match, history, location, classes }) => {
   const [game, setGame] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
 
-  const getGame = () => {
+  const getRandomGame = () => {
     setGame(null);
     setLoaded(false);
-    axios.get(`/bgg/${listType}/${listOption}${queryString}`)
+    axios.get(`/bgg/random/${listType}/${listOption}${queryString}`)
       .then((response) => {
         setGame(response.data);
         setLoaded(true);
@@ -60,7 +60,7 @@ const RandomGame = ({ match, history, location, classes }) => {
   };
 
   useEffect(() => {
-    getGame();
+    getRandomGame();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -84,7 +84,7 @@ const RandomGame = ({ match, history, location, classes }) => {
           className={classes.getGameBtn}
           variant="contained"
           color="primary"
-          onClick={getGame}
+          onClick={getRandomGame}
         >
           Next random game
         </Button>
