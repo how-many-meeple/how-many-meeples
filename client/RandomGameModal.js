@@ -23,7 +23,7 @@ const styles = {
   },
   gameBox: {
     margin: '20px',
-    height: 'calc(100% - 150px)',
+    height: '70%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -35,8 +35,7 @@ const styles = {
     textAlign: 'center',
   },
   getGameBtn: {
-    display: 'block',
-    margin: '0 auto',
+    margin: '0 10%',
   }
 };
 
@@ -57,6 +56,13 @@ const RandomGame = ({ match, history, location, classes }) => {
       .catch(() => {
         setLoaded(true);
       });
+  };
+
+  const viewGameList = (event) => {
+    event.preventDefault();
+    history.push({
+        pathname: `/list/${listType}/${listOption}${queryString}`,
+    });
   };
 
   useEffect(() => {
@@ -88,6 +94,14 @@ const RandomGame = ({ match, history, location, classes }) => {
         >
           Next random game
         </Button>
+        <Button
+          className={classes.getGameBtn}
+          variant="contained"
+          color="primary"
+          onClick={viewGameList}
+        >
+          See Full List
+        </Button>
       </Paper>
     </Modal>
   );
@@ -98,6 +112,7 @@ RandomGame.propTypes = {
     params: PropTypes.shape({
       listType: PropTypes.string,
       listOption: PropTypes.string,
+      minPlayers: PropTypes.number,
     }),
   }),
   location: PropTypes.shape({
