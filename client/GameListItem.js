@@ -10,7 +10,7 @@ const GameListItem = ({ game }) => {
             </ListItemAvatar>
             <ListItemText primary={game.name} />
             <ListItemSecondaryAction>
-                <ListItemText primary={game.stats.average}/>
+                <ListItemText primary={game.stats.average.toFixed(2)}/>
             </ListItemSecondaryAction>
         </ListItem>
     );
