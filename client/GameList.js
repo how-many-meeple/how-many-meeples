@@ -32,16 +32,13 @@ const GameList = ({ match, location, classes }) => {
          <div>
               <h2>List of Compatible Games</h2>
              <List>
-            {
-                gameList.map(
-                    (game, index) => 
-                    game
-                    ? <GameListItem key={index} game={game}/>
-                    : isLoaded
-                        ? <Typography variant="h3" className={classes.failed}>Sorry! Failed to find game</Typography>
-                        : <CircularProgress className={classes.progress} size={200} />
-                )
-            }
+               {
+               gameList  
+               ? gameList.map((game, index) => <GameListItem key={index} game={game}/> ) 
+               : isLoaded
+                ? <Typography variant="h3" className={classes.failed}>Sorry! Failed to find an appropriate game</Typography>
+                : <CircularProgress className={classes.progress} size={200} />
+               }
             </List>
         </div>
     );
