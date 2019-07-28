@@ -2,7 +2,7 @@ import * as headers from './headers';
 import bggUrl from '../config';
 import makeRequest from '../request';
 
-export async function createGamesList(req, res) {
+async function createGamesList(req) {
     const requestUrl = bggUrl
         .segment(`${req.params.listType}/`)
         .segment(req.params.listOption).toString();
@@ -13,12 +13,17 @@ export async function createGamesList(req, res) {
         [headers.BggFilterMaxDuration]: req.query.maxDuration,
         [headers.BggFieldWhitelist]: headers.defaultWhitelist
     };
-    const gamesList = await makeRequest(requestUrl, headers.filterHeaders(requestHeaders));
-    res.json(getRandomGame(gamesList));
+    return await makeRequest(requestUrl, headers.filterHeaders(requestHeaders));
 }
 
-export function getRandomGame(gamesList){
+export async function getRandomGame(req, res){
+    const gamesList = await createGamesList(req);
     const randomGameIndex = Math.floor(Math.random() * (gamesList.length));
-    return gamesList[randomGameIndex];
+    res.json(gamesList[randomGameIndex]);
+}
+
+export async function getCompatibleList(req, res){
+    const gamesList = await createGamesList(req);
+    res.json(gamesList);
 }
     

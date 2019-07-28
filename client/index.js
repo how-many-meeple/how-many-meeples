@@ -3,6 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GameForm from './GameForm';
+import GameList from './GameList';
 import Header from './Header';
 import RandomGameModal from './RandomGameModal';
 import React from 'react';
@@ -24,6 +25,7 @@ ReactDOM.render(
                     <Container fixed>
                         <Route component={GameForm}/>
                         <Route path="/random/:listType/:listOption" component={RandomGameModal} />
+                        <Route path="/list/:listType/:listOption" component={GameList} />
                     </Container>
                 </div>
             </BrowserRouter>
